@@ -1,17 +1,19 @@
-import ClientComponent from "@/app/components/client-component";
+import books from "@/mock/books.json";
+import BookItem from "@/components/book-item";
 
-//* 경로와 함께 명시되는 값들은 페이지 컴포넌트의 props로 전달된다.
-const Page = ({ searchParams }: { searchParams: { q?: string } }) => {
-  console.log(searchParams.q);
+export default function Page({
+  searchParams,
+}: {
+  searchParams: {
+    q?: string;
+  };
+}) {
   return (
     <div>
-      검색 결과 : {searchParams.q}
-      <ClientComponent>
-        여기는 클라이언트 컴포넌트
-        <div>검색 결과 리스트</div>
-      </ClientComponent>
+      {/* 임시로 검색 결과 표시 */}
+      {books.map((book) => (
+        <BookItem key={book.id} {...book} />
+      ))}
     </div>
   );
-};
-
-export default Page;
+}
