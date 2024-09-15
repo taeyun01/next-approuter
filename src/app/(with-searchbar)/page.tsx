@@ -1,6 +1,6 @@
-import ClientComponent from "./client-component";
+import ClientComponent from "../components/client-component";
 import style from "./page.module.css";
-import ServerComponent from "./server-component";
+import ServerComponent from "../components/server-component";
 
 export default function Home() {
   console.log("Home 클라이언트 컴포넌트");

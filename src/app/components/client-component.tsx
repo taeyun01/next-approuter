@@ -5,7 +5,7 @@ import ServerComponent from "./server-component";
 const ClientComponent = ({ children }: { children: React.ReactNode }) => {
   console.log("ClientComponent!");
   return (
-    <div>
+    <div style={{ border: "1px solid red" }}>
       {/* <ServerComponent />; */}
       {children}
     </div>
