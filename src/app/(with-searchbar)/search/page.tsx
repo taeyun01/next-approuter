@@ -1,5 +1,6 @@
 import books from "@/mock/books.json";
 import BookItem from "@/components/book-item";
+import { SearchBooks } from "@/components/fetch-books/fetchBooks";
 
 export default function Page({
   searchParams,
@@ -10,10 +11,7 @@ export default function Page({
 }) {
   return (
     <div>
-      {/* 임시로 검색 결과 표시 */}
-      {books.map((book) => (
-        <BookItem key={book.id} {...book} />
-      ))}
+      <SearchBooks q={searchParams.q} />
     </div>
   );
 }

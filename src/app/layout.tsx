@@ -12,10 +12,10 @@ export default function RootLayout({
       <body>
         <div className={style.container}>
           <header>
-            <Link href={"/"}>📚 ONEBITE BOOKS</Link>
+            <Link href={"/"}>📚 책! 책! 책</Link>
           </header>
           <main>{children}</main>
-          <footer>제작 @winterlood</footer>
+          <footer>한마디: 책을 읽읍시다.</footer>
         </div>
       </body>
     </html>

@@ -1,21 +1,16 @@
-import BookItem from "@/components/book-item";
 import style from "./page.module.css";
-import books from "@/mock/books.json";
+import { AllBooks, RecoBooks } from "@/components/fetch-books/fetchBooks";
 
-export default function Home() {
+export default async function Home() {
   return (
     <div className={style.container}>
       <section>
         <h3>지금 추천하는 도서</h3>
-        {books.map((book) => (
-          <BookItem key={book.id} {...book} />
-        ))}
+        <RecoBooks />
       </section>
       <section>
         <h3>등록된 모든 도서</h3>
-        {books.map((book) => (
-          <BookItem key={book.id} {...book} />
-        ))}
+        <AllBooks />
       </section>
     </div>
   );
