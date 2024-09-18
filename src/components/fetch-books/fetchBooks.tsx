@@ -7,7 +7,8 @@ import style from "@/app/book/[id]/page.module.css";
 //* 모든 도서 불러오기
 export const AllBooks = async () => {
   const response = await fetch(
-    `${process.env.NEXT_PUBLIC_API_SERVER_URL}/book`
+    `${process.env.NEXT_PUBLIC_API_SERVER_URL}/book`,
+    { cache: "no-store" }
   );
 
   if (!response.ok) {
@@ -27,7 +28,9 @@ export const AllBooks = async () => {
 //* 랜덤 도서 불러오기
 export const RecoBooks = async () => {
   const response = await fetch(
-    `${process.env.NEXT_PUBLIC_API_SERVER_URL}/book/random`
+    `${process.env.NEXT_PUBLIC_API_SERVER_URL}/book/random`,
+    // { cache: "force-cache" }
+    { next: { revalidate: 3 } }
   );
 
   if (!response.ok) {
