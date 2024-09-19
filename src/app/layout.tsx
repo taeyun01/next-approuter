@@ -1,6 +1,7 @@
 import "./globals.css";
 import Link from "next/link";
 import style from "./layout.module.css";
+import { Footer } from "@/components/fetch-books/fetchBooks";
 
 export default function RootLayout({
   children,
@@ -15,7 +16,7 @@ export default function RootLayout({
             <Link href={"/"}>📚 책! 책! 책</Link>
           </header>
           <main>{children}</main>
-          <footer>한마디: 책을 읽읍시다.</footer>
+          <Footer />
         </div>
       </body>
     </html>

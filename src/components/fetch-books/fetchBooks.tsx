@@ -98,3 +98,25 @@ export const DetailBooks = async ({ paramsId }: { paramsId: number }) => {
     </div>
   );
 };
+
+//* 총 도서의 갯수 불러오기
+//? 모든 도서를 불러오는 AllBooks()함수도 같은 페이지(index.tsx)에서 같은 api를 호출 하고 있지만
+//? 리퀘스트 메모이제이션 때문에 중복된 /book API를 호출해도 하나의 api를 호출한것처럼 자동으로 처리해준다.
+export const Footer = async () => {
+  const response = await fetch(
+    `${process.env.NEXT_PUBLIC_API_SERVER_URL}/book`
+  );
+
+  if (!response.ok) {
+    return <footer>한마디: 책을 읽읍시다.</footer>;
+  }
+
+  const books: BookData[] = await response.json();
+
+  return (
+    <footer>
+      <div>한마디: 책을 읽읍시다.</div>
+      <div>총 {books.length}개의 도서가 등록되어 있습니다.</div>
+    </footer>
+  );
+};
