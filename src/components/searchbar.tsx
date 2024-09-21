@@ -6,6 +6,7 @@ import style from "./serachbar.module.css";
 
 export default function Searchbar() {
   const router = useRouter();
+  // 안으로 들어와보면 useSearchParams()가 있는데 얘는 비동기로 동작하는 함수이다. 쿼리스트링을 실제로 불러왔을 때 종료된다.
   const searchParams = useSearchParams(); //* App Router버전에서는 useSearchParams() hook을 사용해 쿼리스트링을 꺼내올 수 있다.
   const [search, setSearch] = useState("");
 

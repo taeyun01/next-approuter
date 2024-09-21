@@ -8,7 +8,7 @@ import style from "@/app/book/[id]/page.module.css";
 export const AllBooks = async () => {
   const response = await fetch(
     `${process.env.NEXT_PUBLIC_API_SERVER_URL}/book`,
-    { cache: "no-store" }
+    { cache: "force-cache" } // 현재 도서의 정보는 수정될 일이 없기 때문에 force-cache로 설정하여 캐싱해준다.
   );
 
   if (!response.ok) {
@@ -103,8 +103,11 @@ export const DetailBooks = async ({ paramsId }: { paramsId: number }) => {
 //? 모든 도서를 불러오는 AllBooks()함수도 같은 페이지(index.tsx)에서 같은 api를 호출 하고 있지만
 //? 리퀘스트 메모이제이션 때문에 중복된 /book API를 호출해도 하나의 api를 호출한것처럼 자동으로 처리해준다.
 export const Footer = async () => {
+  // Footer컴포넌트 때문에 index페이지가 다이나믹 페이지가 되어버리니, force-cache로 페이지를 캐싱하여 스택틱페이지로 만들어준다.
+  // 추후에 index페이지에 도서를 추가하여 렌더링 해야 된다던가 하면 다이나믹 페이지가 맞다.
   const response = await fetch(
-    `${process.env.NEXT_PUBLIC_API_SERVER_URL}/book`
+    `${process.env.NEXT_PUBLIC_API_SERVER_URL}/book`,
+    { cache: "force-cache" }
   );
 
   if (!response.ok) {

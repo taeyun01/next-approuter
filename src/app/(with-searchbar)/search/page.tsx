@@ -1,5 +1,3 @@
-import books from "@/mock/books.json";
-import BookItem from "@/components/book-item";
 import { SearchBooks } from "@/components/fetch-books/fetchBooks";
 
 export default function Page({
