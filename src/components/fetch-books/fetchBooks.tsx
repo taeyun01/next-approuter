@@ -1,6 +1,7 @@
 import BookItem from "@/components/book-item";
 import { BookData } from "@/types";
 import style from "@/app/book/[id]/page.module.css";
+import { notFound } from "next/navigation";
 
 //? 각각 파일 만들어서 분리하기
 
@@ -8,7 +9,7 @@ import style from "@/app/book/[id]/page.module.css";
 export const AllBooks = async () => {
   const response = await fetch(
     `${process.env.NEXT_PUBLIC_API_SERVER_URL}/book`,
-    { cache: "force-cache" } // 현재 도서의 정보는 수정될 일이 없기 때문에 force-cache로 설정하여 캐싱해준다.
+    { cache: "force-cache" } // 현재 도서의  정보는 수정될 일이 없기 때문에 force-cache로 설정하여 캐싱해준다.
   );
 
   if (!response.ok) {
@@ -48,9 +49,13 @@ export const RecoBooks = async () => {
 };
 
 //* 검색 시 도서 불러오기
+//? 쿼리스트링처럼 실시간으로 데이터를 서버로 부터 불러오는 페이지는 풀라우트는 포기해야한다.
+//? 조금이라도 빠르게 렌더링하려면 데이터 캐시를 이용하자 (검색 api결과를 캐싱해두고 렌더링 해준다.)
+//? 정리: 서치페이지는 쿼리스트링 같은 동적인 페이지로 의존을 하고 있기 때문에 스태틱페이지로 설정할 순 없고 데이터캐시를 최대한 활용하여 최적화를 해준다.
 export const SearchBooks = async ({ q }: { q?: string }) => {
   const response = await fetch(
-    `${process.env.NEXT_PUBLIC_API_SERVER_URL}/book/search?q=${q}`
+    `${process.env.NEXT_PUBLIC_API_SERVER_URL}/book/search?q=${q}`,
+    { cache: "force-cache" } // 이미 한번 검색이 된 데이터도 좀 더 빠르게 렌더링 해준다.
   );
 
   if (!response.ok) {
@@ -74,6 +79,7 @@ export const DetailBooks = async ({ paramsId }: { paramsId: number }) => {
   );
 
   if (!response.ok) {
+    if (response.status === 404) return notFound(); // 없는 id도서를 불러올 시 notfound페이지 호출
     return <div>검색 데이터를 불러오는데 오류가 발생했습니다.</div>;
   }
 
