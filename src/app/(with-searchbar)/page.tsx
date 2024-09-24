@@ -1,6 +1,7 @@
 import { Suspense } from "react";
 import style from "./page.module.css";
 import { AllBooks, RecoBooks } from "@/components/fetch-books/fetchBooks";
+import BookListSkeleton from "@/components/skeleton/book-list-skeleton";
 
 //? 라우트세그먼트는 정말 특별한 상황아니면 권장하지 않는다.
 // 특정 페이지의 유형을 강제로 Static 또는 Dynamic 페이지로 설정하는 옵션 (4가지가 있음)
@@ -18,13 +19,13 @@ export default async function Home() {
     <div className={style.container}>
       <section>
         <h3>지금 추천하는 도서</h3>
-        <Suspense fallback={<div>추천 도서를 불러오는 중입니다...</div>}>
+        <Suspense fallback={<BookListSkeleton count={3} />}>
           <RecoBooks />
         </Suspense>
       </section>
       <section>
         <h3>등록된 모든 도서</h3>
-        <Suspense fallback={<div>등록된 도서를 불러오는 중입니다...</div>}>
+        <Suspense fallback={<BookListSkeleton count={10} />}>
           <AllBooks />
         </Suspense>
       </section>

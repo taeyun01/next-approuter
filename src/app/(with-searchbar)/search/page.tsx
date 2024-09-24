@@ -1,5 +1,6 @@
 import BookItem from "@/components/book-item";
 import { SearchBooks } from "@/components/fetch-books/fetchBooks";
+import BookListSkeleton from "@/components/skeleton/book-list-skeleton";
 import { BookData } from "@/types";
 import { delay, delay2 } from "@/util/delay";
 import { Suspense } from "react";
@@ -23,7 +24,10 @@ export default async function Page({
     // Suspense컴포넌트를 이용하여 특정 컴포넌트의 스트리밍을 설정할 수 있다.
     // 검색을 다시 한번 했을 때 쿼스트링이 바뀌면서 다시 스트리밍을 해줘야 하는데 Suspense컴포넌트의 key값을 바꿔주면 가능하다.
     // key값을 쿼리스트링만 바뀌어도 Suspense가 동작하게 할 수 있다. 리액트에서 key값이 바뀌면 컴포넌트가 완전히 바뀌었다. 라고 인식해서 새로운 컴포넌트를 그리게 된다. (이렇게 트릭처럼 사용가능)
-    <Suspense key={searchParams.q || ""} fallback={<div>Loading...</div>}>
+    <Suspense
+      key={searchParams.q || ""}
+      fallback={<BookListSkeleton count={4} />}
+    >
       <SearchBooks q={searchParams.q || ""} />
     </Suspense>
   );
