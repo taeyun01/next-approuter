@@ -1,4 +1,7 @@
+import BookItem from "@/components/book-item";
 import { SearchBooks } from "@/components/fetch-books/fetchBooks";
+import { BookData } from "@/types";
+import { delay, delay2 } from "@/util/delay";
 
 // 강제로 Static 페이지로 설정("no-store"로 설정 돼있어도 강제로 스태틱 페이지로 바뀌면서 캐싱됨)
 // 하지만 부작용이 있음 이렇게 쿼리스트링값을 의존하고 있는 서치페이지는 라우트세그먼트로 강제로 스태틱 페이지로 바꾸게 되면 검색기능이 제대로 동작하지 않음.
@@ -8,7 +11,7 @@ import { SearchBooks } from "@/components/fetch-books/fetchBooks";
 // export const dynamic = "error"; // Static페이지로 설정하면 안되는 페이지들이 있으면 -> 빌드 에러 발생과 함께 에러 이유를 출력해줌
 // 빌드 오류 : Error: Route /search with `dynamic = "error"` couldn't be rendered statically because it used `searchParams.q`.
 
-export default function Page({
+export default async function Page({
   searchParams,
 }: {
   searchParams: {

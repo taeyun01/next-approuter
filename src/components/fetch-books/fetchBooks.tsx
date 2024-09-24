@@ -2,6 +2,7 @@ import BookItem from "@/components/book-item";
 import { BookData } from "@/types";
 import style from "@/app/book/[id]/page.module.css";
 import { notFound } from "next/navigation";
+import { delay } from "@/util/delay";
 
 //? 각각 파일 만들어서 분리하기
 
@@ -53,6 +54,7 @@ export const RecoBooks = async () => {
 //? 조금이라도 빠르게 렌더링하려면 데이터 캐시를 이용하자 (검색 api결과를 캐싱해두고 렌더링 해준다.)
 //? 정리: 서치페이지는 쿼리스트링 같은 동적인 페이지로 의존을 하고 있기 때문에 스태틱페이지로 설정할 순 없고 데이터캐시를 최대한 활용하여 최적화를 해준다.
 export const SearchBooks = async ({ q }: { q?: string }) => {
+  await delay(1500);
   const response = await fetch(
     `${process.env.NEXT_PUBLIC_API_SERVER_URL}/book/search?q=${q}`,
     { cache: "force-cache" } // 이미 한번 검색이 된 데이터도 좀 더 빠르게 렌더링 해준다.

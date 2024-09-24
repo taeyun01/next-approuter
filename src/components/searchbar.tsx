@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
-import style from "./serachbar.module.css";
+import style from "./searchbar.module.css";
 
 export default function Searchbar() {
   const router = useRouter();
@@ -22,7 +22,7 @@ export default function Searchbar() {
 
   const onSubmit = () => {
     if (!search || q === search) return;
-    router.push(`/search?q=${search}`);
+    router.push(`/search?q=${search.trim()}`);
   };
 
   const onKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {

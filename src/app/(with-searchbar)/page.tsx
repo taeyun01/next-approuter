@@ -7,7 +7,7 @@ import { AllBooks, RecoBooks } from "@/components/fetch-books/fetchBooks";
 // 2. force-dynamic (강제로 Dynamic 페이지로 바꿔줌)
 // 3. force-static (강제로 Static 페이지로 바꿔줌)
 // 4. error (강제로 Static 페이지로 바꿔줌, 대신 Static페이지로 설정하면 안되는 페이지들이 있으면 -> 빌드 에러발생과 함께 에러 이유를 출력해줌)
-export const dynamic = "force-dynamic";
+// export const dynamic = "force-dynamic";
 
 export default async function Home() {
   return (
