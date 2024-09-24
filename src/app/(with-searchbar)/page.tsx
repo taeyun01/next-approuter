@@ -1,3 +1,4 @@
+import { Suspense } from "react";
 import style from "./page.module.css";
 import { AllBooks, RecoBooks } from "@/components/fetch-books/fetchBooks";
 
@@ -9,16 +10,23 @@ import { AllBooks, RecoBooks } from "@/components/fetch-books/fetchBooks";
 // 4. error (강제로 Static 페이지로 바꿔줌, 대신 Static페이지로 설정하면 안되는 페이지들이 있으면 -> 빌드 에러발생과 함께 에러 이유를 출력해줌)
 // export const dynamic = "force-dynamic";
 
+// Suspense의 진가를 알아보기 위해 잠시 다이나믹 페이지로 변경하여 랜던 도서와 모든 도서를 서스펜스로 스트리밍 처리해보겠다.
+export const dynamic = "force-dynamic";
+
 export default async function Home() {
   return (
     <div className={style.container}>
       <section>
         <h3>지금 추천하는 도서</h3>
-        <RecoBooks />
+        <Suspense fallback={<div>추천 도서를 불러오는 중입니다...</div>}>
+          <RecoBooks />
+        </Suspense>
       </section>
       <section>
         <h3>등록된 모든 도서</h3>
-        <AllBooks />
+        <Suspense fallback={<div>등록된 도서를 불러오는 중입니다...</div>}>
+          <AllBooks />
+        </Suspense>
       </section>
     </div>
   );
