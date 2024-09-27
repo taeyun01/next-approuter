@@ -1,4 +1,5 @@
-import { DetailBooks } from "@/components/fetch-books/fetchBooks";
+import { DetailBooks, ReviewEditor } from "@/components/fetch-books/fetchBooks";
+import style from "@/app/book/[id]/page.module.css";
 
 //? false로 설정 시 아래 정적 파라미터를 설정하지 않은 페이지들은 모두 404페이지로 리다이텍트 시킨다.
 // export const dynamicParams = false; // 설정하지 않으면 기본값은 true
@@ -11,10 +12,11 @@ export const generateStaticParams = async () => {
 };
 
 //? 해당 book페이지에 어떤한 도서데이터들이 빌드타임에 만들어줘야하는지 알려줘야한다.
-export default async function Page({
-  params,
-}: {
-  params: { id: string | string[] };
-}) {
-  return <DetailBooks paramsId={Number(params.id)} />;
+export default async function Page({ params }: { params: { id: string } }) {
+  return (
+    <div className={style.container}>
+      <DetailBooks paramsId={params.id} />
+      <ReviewEditor />
+    </div>
+  );
 }

@@ -80,7 +80,7 @@ export const SearchBooks = async ({ q }: { q: string }) => {
 };
 
 //* 특정[id] 도서 불러오기
-export const DetailBooks = async ({ paramsId }: { paramsId: number }) => {
+export const DetailBooks = async ({ paramsId }: { paramsId: string }) => {
   const response = await fetch(
     `${process.env.NEXT_PUBLIC_API_SERVER_URL}/book/${paramsId}`
   );
@@ -95,7 +95,7 @@ export const DetailBooks = async ({ paramsId }: { paramsId: number }) => {
     detailBook;
 
   return (
-    <div className={style.container}>
+    <section>
       <div
         className={style.cover_img_container}
         style={{ backgroundImage: `url('${coverImgUrl}')` }}
@@ -108,7 +108,7 @@ export const DetailBooks = async ({ paramsId }: { paramsId: number }) => {
         {author} | {publisher}
       </div>
       <div className={style.description}>{description}</div>
-    </div>
+    </section>
   );
 };
 
@@ -134,5 +134,27 @@ export const Footer = async () => {
       <div>한마디: 책을 읽읍시다.</div>
       <div>총 {books.length}개의 도서가 등록되어 있습니다.</div>
     </footer>
+  );
+};
+
+export const ReviewEditor = () => {
+  //? 서버액션을 사용하는 이유는 조금더 간결하고 편리하게 서버측에서 실행되는 어떠한 동작을 정의하는데 있다.
+  //* 1. 서버액션을 만들면
+  const createReviewAction = async (formData: FormData) => {
+    "use server";
+    //* 2. 자동으로 ⬇️아래 코드를 실행하는 API가 하나 자동으로 생성된다.
+    //* 3. 그런 API는 브라우저에서 form태그를 제출했을 때 자동으로 호출이 된다.
+    const content = formData.get("content")?.toString(); // 리뷰내용 값 가져옴
+    const author = formData.get("author")?.toString(); // 작성자 값 가져옴
+    console.log(content, author);
+  };
+  return (
+    <section>
+      <form action={createReviewAction}>
+        <input name="content" placeholder="리뷰내용" type="text" />
+        <input name="author" placeholder="작성자" type="text" />
+        <button type="submit">작성하기</button>
+      </form>
+    </section>
   );
 };
