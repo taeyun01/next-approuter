@@ -3,6 +3,7 @@ import { BookData } from "@/types";
 import style from "@/app/book/[id]/page.module.css";
 import { notFound } from "next/navigation";
 import { delay } from "@/util/delay";
+import { createReviewAction } from "@/actions/create-review.action";
 
 //? 각각 파일 만들어서 분리하기
 
@@ -137,22 +138,14 @@ export const Footer = async () => {
   );
 };
 
-export const ReviewEditor = () => {
-  //? 서버액션을 사용하는 이유는 조금더 간결하고 편리하게 서버측에서 실행되는 어떠한 동작을 정의하는데 있다.
-  //* 1. 서버액션을 만들면
-  const createReviewAction = async (formData: FormData) => {
-    "use server";
-    //* 2. 자동으로 ⬇️아래 코드를 실행하는 API가 하나 자동으로 생성된다.
-    //* 3. 그런 API는 브라우저에서 form태그를 제출했을 때 자동으로 호출이 된다.
-    const content = formData.get("content")?.toString(); // 리뷰내용 값 가져옴
-    const author = formData.get("author")?.toString(); // 작성자 값 가져옴
-    console.log(content, author);
-  };
+export const ReviewEditor = ({paramsId}: {paramsId: string}) => {
   return (
     <section>
       <form action={createReviewAction}>
-        <input name="content" placeholder="리뷰내용" type="text" />
-        <input name="author" placeholder="작성자" type="text" />
+        {/* 대부분의 데이터를 서버액션으로 충분히 넘길 수 있으니까 해당 트릭을 잘 이용하면 된다 */}
+        <input name="paramsId" value={paramsId} type="hidden" />
+        <input required name="content" placeholder="리뷰내용" type="text" />
+        <input required name="author" placeholder="작성자" type="text" />
         <button type="submit">작성하기</button>
       </form>
     </section>

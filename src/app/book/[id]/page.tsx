@@ -16,7 +16,7 @@ export default async function Page({ params }: { params: { id: string } }) {
   return (
     <div className={style.container}>
       <DetailBooks paramsId={params.id} />
-      <ReviewEditor />
+      <ReviewEditor paramsId={params.id} />
     </div>
   );
 }
