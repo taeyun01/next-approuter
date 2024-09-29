@@ -1,9 +1,10 @@
 import BookItem from "@/components/book-item";
-import { BookData } from "@/types";
+import { BookData, ReviewData } from "@/types";
 import style from "@/app/book/[id]/page.module.css";
 import { notFound } from "next/navigation";
 import { delay } from "@/util/delay";
 import { createReviewAction } from "@/actions/create-review.action";
+import ReviewItem from "../review-item";
 
 //? 각각 파일 만들어서 분리하기
 
@@ -81,9 +82,9 @@ export const SearchBooks = async ({ q }: { q: string }) => {
 };
 
 //* 특정[id] 도서 불러오기
-export const DetailBooks = async ({ paramsId }: { paramsId: string }) => {
+export const DetailBooks = async ({ bookId }: { bookId: string }) => {
   const response = await fetch(
-    `${process.env.NEXT_PUBLIC_API_SERVER_URL}/book/${paramsId}`
+    `${process.env.NEXT_PUBLIC_API_SERVER_URL}/book/${bookId}`
   );
 
   if (!response.ok) {
@@ -138,16 +139,26 @@ export const Footer = async () => {
   );
 };
 
-export const ReviewEditor = ({paramsId}: {paramsId: string}) => {
+// 리뷰조회 api호출
+export const ReviewList = async ({ bookId }: { bookId: string }) => {
+  const response = await fetch(
+    `${process.env.NEXT_PUBLIC_API_SERVER_URL}/review/book/${bookId}`
+  );
+
+  if (!response.ok) {
+    throw new Error(
+      `리뷰 데이터를 불러오는데 오류가 발생했습니다. : ${response.status}`
+    );
+  }
+
+  const reviews: ReviewData[] = await response.json();
+  console.log(reviews);
+
   return (
     <section>
-      <form action={createReviewAction}>
-        {/* 대부분의 데이터를 서버액션으로 충분히 넘길 수 있으니까 해당 트릭을 잘 이용하면 된다 */}
-        <input name="paramsId" value={paramsId} type="hidden" />
-        <input required name="content" placeholder="리뷰내용" type="text" />
-        <input required name="author" placeholder="작성자" type="text" />
-        <button type="submit">작성하기</button>
-      </form>
+      {reviews.map((review) => (
+        <ReviewItem key={`review-item${review.id}`} {...review} />
+      ))}
     </section>
   );
 };
