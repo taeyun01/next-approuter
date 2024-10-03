@@ -17,9 +17,9 @@ const ReviewEditor = ({ bookId }: { bookId: string }) => {
 
   // state값이 바뀔 때 에러가 발생했는지 안했는지 검증
   useEffect(() => {
-    // state.status가 false면 실행
+    // state값이 있고, state.status가 false인 경우
     if (state && !state.status) {
-      alert(state.error);
+      alert(state.error); // 에러호출
     }
   }, [state]);
 
@@ -27,7 +27,7 @@ const ReviewEditor = ({ bookId }: { bookId: string }) => {
     <section>
       <form className={style.form_container} action={fromAction}>
         {/* 대부분의 데이터를 서버액션으로 충분히 넘길 수 있으니까 해당 트릭을 잘 이용하면 된다 */}
-        <input name="bookId" value={bookId} type="hidden" />
+        <input name="bookId" defaultValue={bookId} hidden />
         <textarea
           disabled={isPending}
           required

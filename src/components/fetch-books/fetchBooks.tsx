@@ -153,7 +153,6 @@ export const ReviewList = async ({ bookId }: { bookId: string }) => {
   }
 
   const reviews: ReviewData[] = await response.json();
-  console.log(reviews);
 
   return (
     <section>

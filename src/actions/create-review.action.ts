@@ -1,6 +1,6 @@
 "use server";
 import { delay } from "@/util/delay";
-import { revalidatePath, revalidateTag } from "next/cache";
+import { revalidateTag } from "next/cache";
 
 // 별도의 파일로 분리했을 때는 함수 안쪽이 아닌 최상단에 작성하는게 일반적임
 
@@ -14,7 +14,8 @@ export const createReviewAction = async (
   // "use server";
   //* 2. 자동으로 ⬇️아래 코드를 실행하는 API가 하나 자동으로 생성된다.
   //* 3. 그런 API는 브라우저에서 form태그를 제출했을 때 자동으로 호출이 된다.
-  console.log(formData);
+  // console.log(formData);
+
   const content = formData.get("content")?.toString(); // 리뷰내용 값 가져옴
   const author = formData.get("author")?.toString(); // 작성자 값 가져옴
   const bookId = formData.get("bookId")?.toString(); // 도서 id값
