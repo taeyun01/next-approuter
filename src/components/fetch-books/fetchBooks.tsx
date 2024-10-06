@@ -5,6 +5,7 @@ import { notFound } from "next/navigation";
 import { delay } from "@/util/delay";
 import { createReviewAction } from "@/actions/create-review.action";
 import ReviewItem from "../review-item";
+import Image from "next/image";
 
 //? 각각 파일 만들어서 분리하기
 
@@ -102,7 +103,12 @@ export const DetailBooks = async ({ bookId }: { bookId: string }) => {
         className={style.cover_img_container}
         style={{ backgroundImage: `url('${coverImgUrl}')` }}
       >
-        <img src={coverImgUrl} />
+        <Image
+          src={coverImgUrl}
+          alt={`도서: ${title}의 표지 이미지`}
+          width={240}
+          height={300}
+        />
       </div>
       <div className={style.title}>{title}</div>
       <div className={style.subTitle}>{subTitle}</div>
