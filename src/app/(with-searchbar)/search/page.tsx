@@ -3,7 +3,27 @@ import { SearchBooks } from "@/components/fetch-books/fetchBooks";
 import BookListSkeleton from "@/components/skeleton/book-list-skeleton";
 import { BookData } from "@/types";
 import { delay, delay2 } from "@/util/delay";
+import { Metadata } from "next";
 import { Suspense } from "react";
+
+type Props = {
+  searchParams: {
+    q?: string;
+  };
+};
+
+// 동적 메타데이터 생성
+export function generateMetadata({ searchParams }: Props): Metadata {
+  return {
+    title: `검색어 : ${searchParams.q}`,
+    description: `${searchParams.q}에 대한 검색 결과입니다.`,
+    openGraph: {
+      title: `검색어 : ${searchParams.q}`,
+      description: `${searchParams.q}에 대한 검색 결과입니다.`,
+      images: ["/thumbnail.png"],
+    },
+  };
+}
 
 // 강제로 Static 페이지로 설정("no-store"로 설정 돼있어도 강제로 스태틱 페이지로 바뀌면서 캐싱됨)
 // 하지만 부작용이 있음 이렇게 쿼리스트링값을 의존하고 있는 서치페이지는 라우트세그먼트로 강제로 스태틱 페이지로 바꾸게 되면 검색기능이 제대로 동작하지 않음.

@@ -85,7 +85,8 @@ export const SearchBooks = async ({ q }: { q: string }) => {
 //* 특정[id] 도서 불러오기
 export const DetailBooks = async ({ bookId }: { bookId: string }) => {
   const response = await fetch(
-    `${process.env.NEXT_PUBLIC_API_SERVER_URL}/book/${bookId}`
+    `${process.env.NEXT_PUBLIC_API_SERVER_URL}/book/${bookId}`,
+    { cache: "force-cache" }
   );
 
   if (!response.ok) {

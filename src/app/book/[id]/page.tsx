@@ -1,6 +1,37 @@
 import { DetailBooks, ReviewList } from "@/components/fetch-books/fetchBooks";
 import style from "@/app/book/[id]/page.module.css";
 import ReviewEditor from "@/components/review-editor";
+import { Metadata } from "next";
+import { BookData } from "@/types";
+
+// 상세페이지 메타데이터 생성
+// 인터셉팅에는 적용되지 않을꺼다 근데 크게 상관없다.
+export async function generateMetadata({
+  params,
+}: {
+  params: { id: string };
+}): Promise<Metadata | null> {
+  const response = await fetch(
+    `${process.env.NEXT_PUBLIC_API_SERVER_URL}/book/${params.id}`,
+    { cache: "force-cache" }
+  );
+
+  if (!response.ok) {
+    throw new Error(response.statusText);
+  }
+
+  const book: BookData = await response.json();
+
+  return {
+    title: `${book.title} - 책! 책! 책!`,
+    description: `${book.description}`,
+    openGraph: {
+      title: `${book.title} - 책! 책! 책!`,
+      description: `${book.description}`,
+      images: [book.coverImgUrl],
+    },
+  };
+}
 
 //? false로 설정 시 아래 정적 파라미터를 설정하지 않은 페이지들은 모두 404페이지로 리다이텍트 시킨다.
 // export const dynamicParams = false; // 설정하지 않으면 기본값은 true
