@@ -22,7 +22,7 @@ const Modal = ({ children }: { children: React.ReactNode }) => {
       dialogRef.current?.showModal(); //* 강제로 열어준다.
       dialogRef.current?.scrollTo({
         top: 0,
-        behavior: "smooth",
+        // behavior: "smooth",
       });
     }
   }, []);

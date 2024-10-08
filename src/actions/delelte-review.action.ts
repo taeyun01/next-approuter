@@ -6,6 +6,10 @@ export const deleteReviewAction = async (_: any, formData: FormData) => {
   // 삭제할 리뷰id를 formData에서 가져옴
   const reviewId = formData.get("reviewId")?.toString(); // reviewId가 존재할 경우 문자열로 변환
   const bookId = formData.get("bookId")?.toString(); // bookId가 존재할 경우 문자열로 변환
+  const isDeleteOrEdit = formData.get("isDeleteOrEdit")?.toString();
+  const editContent = formData.get("editContent")?.toString();
+  console.log("isDeleteOrEdit", isDeleteOrEdit);
+  console.log("editContent", editContent);
 
   if (!reviewId) {
     return {
@@ -18,7 +22,11 @@ export const deleteReviewAction = async (_: any, formData: FormData) => {
     const response = await fetch(
       `${process.env.NEXT_PUBLIC_API_SERVER_URL}/review/${reviewId}`,
       {
-        method: "DELETE",
+        method: isDeleteOrEdit,
+        body:
+          isDeleteOrEdit === "DELETE"
+            ? null
+            : JSON.stringify({ content: editContent }),
       }
     );
 

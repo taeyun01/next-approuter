@@ -15,7 +15,7 @@ export default function Layout({ children }: { children: ReactNode }) {
         이렿게 작성해주게 되면 서버측 사전렌더링에서는 완전히 제외되게 되고, 그전까지는 Loading... UI를 보여주게 된다.
         그럼 이제 빌드타임 때 에러가 해결된다.
       */}
-      <Suspense fallback={<div>Loading...</div>}>
+      <Suspense fallback={null}>
         <Searchbar />
       </Suspense>
       {children}

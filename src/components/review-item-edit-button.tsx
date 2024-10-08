@@ -1,6 +1,6 @@
 "use client";
 
-import { useActionState, useEffect, useRef, useState } from "react";
+import { useActionState, useEffect, useRef } from "react";
 import style from "./review-item.module.css";
 import { editReviewAction } from "@/actions/edit-review.action";
 
