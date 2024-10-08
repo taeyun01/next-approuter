@@ -1,8 +1,5 @@
-import BookItem from "@/components/book-item";
 import { SearchBooks } from "@/components/fetch-books/fetchBooks";
 import BookListSkeleton from "@/components/skeleton/book-list-skeleton";
-import { BookData } from "@/types";
-import { delay, delay2 } from "@/util/delay";
 import { Metadata } from "next";
 import { Suspense } from "react";
 

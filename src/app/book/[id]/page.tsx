@@ -40,7 +40,16 @@ export async function generateMetadata({
 //? next가 빌드타임에 이 정적 파라미터를 읽어서 파라미터에 해당하는 book/1, /2, /3 페이지를 빌드타임에 정적으로 만들어준다.
 //! 주의: 1. id값은 문자열로만 명시, 2. fetch를 통해 데이터 캐싱 설정을 안하더라도 generateStaticParams()를 쓰면 해당 페이지는 강제로 캐싱이 된다.
 export const generateStaticParams = async () => {
-  return [{ id: "1" }, { id: "2" }, { id: "3" }];
+  const response = await fetch(
+    `${process.env.NEXT_PUBLIC_API_SERVER_URL}/book`
+  );
+  if (!response.ok) {
+    throw new Error(response.statusText);
+  }
+  const books: BookData[] = await response.json();
+
+  //* 현재 등록된 모든 책들의 페이지를 전부 정적으로 생성
+  return books.map((book) => ({ id: book.id.toString() }));
 };
 
 //? 해당 book페이지에 어떤한 도서데이터들이 빌드타임에 만들어줘야하는지 알려줘야한다.

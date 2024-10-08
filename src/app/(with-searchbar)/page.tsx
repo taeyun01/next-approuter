@@ -1,7 +1,5 @@
-import { Suspense } from "react";
 import style from "./page.module.css";
 import { AllBooks, RecoBooks } from "@/components/fetch-books/fetchBooks";
-import BookListSkeleton from "@/components/skeleton/book-list-skeleton";
 import { Metadata } from "next";
 
 //? 라우트세그먼트는 정말 특별한 상황아니면 권장하지 않는다.
@@ -13,7 +11,7 @@ import { Metadata } from "next";
 // export const dynamic = "force-dynamic";
 
 // Suspense의 진가를 알아보기 위해 잠시 다이나믹 페이지로 변경하여 랜던 도서와 모든 도서를 서스펜스로 스트리밍 처리해보겠다.
-export const dynamic = "force-dynamic";
+// export const dynamic = "force-dynamic";
 
 export const metadata: Metadata = {
   title: "책! 책! 책!",
@@ -30,15 +28,11 @@ export default async function Home() {
     <div className={style.container}>
       <section>
         <h3>지금 추천하는 도서</h3>
-        <Suspense fallback={<BookListSkeleton count={3} />}>
-          <RecoBooks />
-        </Suspense>
+        <RecoBooks />
       </section>
       <section>
         <h3>등록된 모든 도서</h3>
-        <Suspense fallback={<BookListSkeleton count={10} />}>
-          <AllBooks />
-        </Suspense>
+        <AllBooks />
       </section>
     </div>
   );

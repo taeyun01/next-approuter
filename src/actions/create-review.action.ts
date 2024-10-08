@@ -1,5 +1,4 @@
 "use server";
-import { delay } from "@/util/delay";
 import { revalidateTag } from "next/cache";
 
 // 별도의 파일로 분리했을 때는 함수 안쪽이 아닌 최상단에 작성하는게 일반적임
@@ -30,7 +29,6 @@ export const createReviewAction = async (
   }
 
   try {
-    await delay(1500);
     const response = await fetch(
       `${process.env.NEXT_PUBLIC_API_SERVER_URL}/review`,
       {
