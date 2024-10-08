@@ -17,11 +17,20 @@
 
 .bottom_container {
   display: flex;
+  align-items: center;
   gap: 10px;
   color: gray;
   font-size: 14px;
 }
 
-.delete_btn {
+.delete_btn,
+.edit_btn {
   cursor: pointer;
+}
+
+.edit_btn {
+  border: none;
+  color: gray;
+  background-color: transparent;
+  font-size: 14px;
 }

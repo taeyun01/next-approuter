@@ -1,6 +1,7 @@
 import { ReviewData } from "@/types";
 import style from "./review-item.module.css";
 import ReviewItemDeleteButton from "./review-item-delelte-button";
+import ReviewItemEditButton from "./review-item-edit-button";
 
 const ReviewItem = ({ id, content, author, createdAt, bookId }: ReviewData) => {
   return (
@@ -12,6 +13,7 @@ const ReviewItem = ({ id, content, author, createdAt, bookId }: ReviewData) => {
           {new Date(createdAt).toLocaleDateString()}
         </div>
         <ReviewItemDeleteButton reviewId={id} bookId={bookId} />
+        <ReviewItemEditButton reviewId={id} bookId={bookId} />
       </div>
     </div>
   );
