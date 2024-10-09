@@ -8,6 +8,8 @@
 }
 
 .container > header {
+  display: flex;
+  justify-content: space-between;
   height: 60px;
   font-weight: bold;
   font-size: 18px;

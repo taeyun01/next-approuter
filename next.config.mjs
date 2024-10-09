@@ -8,7 +8,18 @@ const nextConfig = {
     },
   },
   images: {
-    domains: ["shopping-phinf.pstatic.net"],
+    remotePatterns: [
+      {
+        protocol: "https",
+        hostname: "shopping-phinf.pstatic.net",
+        // port: '', // 필요시 포트 추가
+        // pathname: '/path/to/images/**', // 특정 경로에만 적용하고 싶을 때
+      },
+      {
+        protocol: "https",
+        hostname: "contents.kyobobook.co.kr",
+      },
+    ],
   },
 };
 

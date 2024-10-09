@@ -11,7 +11,8 @@ import Image from "next/image";
 export const AllBooks = async () => {
   const response = await fetch(
     `${process.env.NEXT_PUBLIC_API_SERVER_URL}/book`,
-    { cache: "force-cache" } // 현재 도서의  정보는 수정될 일이 없기 때문에 force-cache로 설정하여 캐싱해준다.
+    // { cache: "force-cache" } // 현재 도서의  정보는 수정될 일이 없기 때문에 force-cache로 설정하여 캐싱해준다.
+    { next: { tags: ["allBooks"] } }
   );
 
   if (!response.ok) {
@@ -124,7 +125,8 @@ export const Footer = async () => {
   // 추후에 index페이지에 도서를 추가하여 렌더링 해야 된다던가 하면 다이나믹 페이지가 맞다.
   const response = await fetch(
     `${process.env.NEXT_PUBLIC_API_SERVER_URL}/book`,
-    { cache: "force-cache" }
+    // { cache: "force-cache" }
+    { next: { tags: ["allBooks"] } }
   );
 
   if (!response.ok) {
