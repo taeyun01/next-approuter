@@ -17,7 +17,7 @@ Readonly<{
         <div className={style.container}>
           <header>
             <Link href="/">📖 책! 책! 책!</Link>
-            <Link href="/addBook">📚 도서 등록</Link>
+            <Link href="/addBook">📚 내 도서 등록</Link>
           </header>
           <main>{children}</main>
           <Footer />

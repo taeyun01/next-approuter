@@ -19,6 +19,10 @@ const nextConfig = {
         protocol: "https",
         hostname: "contents.kyobobook.co.kr",
       },
+      {
+        protocol: "https",
+        hostname: "cdn-icons-png.flaticon.com",
+      },
     ],
   },
 };

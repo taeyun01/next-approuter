@@ -130,14 +130,14 @@ export const Footer = async () => {
   );
 
   if (!response.ok) {
-    return <footer>한마디: 책을 읽읍시다.</footer>;
+    return <footer>한마디: 책 좀 읽읍시다.</footer>;
   }
 
   const books: BookData[] = await response.json();
 
   return (
     <footer>
-      <div>한마디: 책을 읽읍시다.</div>
+      <div>한마디: 책 좀 읽읍시다.</div>
       <div>총 {books.length}개의 도서가 등록되어 있습니다.</div>
     </footer>
   );

@@ -53,7 +53,7 @@ export const addBookAction = async (_: any, formData: FormData) => {
   } catch (error) {
     return {
       status: false,
-      error: `도서 등록에 실패했습니다. ${error}`,
+      error: `도서 등록에 실패했습니다. 이미지 형식 오류 ${error}`,
     };
   }
 };
