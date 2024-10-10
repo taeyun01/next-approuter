@@ -53,10 +53,16 @@ export const generateStaticParams = async () => {
 };
 
 //? 해당 book페이지에 어떤한 도서데이터들이 빌드타임에 만들어줘야하는지 알려줘야한다.
-export default async function Page({ params }: { params: { id: string } }) {
+export default async function Page({
+  params,
+  parallel,
+}: {
+  params: { id: string };
+  parallel: boolean;
+}) {
   return (
     <div className={style.container}>
-      <DetailBooks bookId={params.id} />
+      <DetailBooks bookId={params.id} parallel={parallel} />
       <ReviewEditor bookId={params.id} />
       <ReviewList bookId={params.id} />
     </div>

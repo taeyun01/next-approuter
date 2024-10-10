@@ -27,6 +27,7 @@ const BookPreview = ({
         alt={`도서: ${title ? title : "제목"}의 표지 이미지`}
         width={80}
         height={105}
+        unoptimized // 모든 이미지 도메인 허용
       />
       <div>
         <div className={style.title}>{title ? title : "제목"}</div>

@@ -16,6 +16,14 @@ const BookForm = () => {
   const router = useRouter();
   const [state, formAction, isPending] = useActionState(addBookAction, null);
 
+  const onAddImageUrl = () => {
+    const imageUrl = prompt("이미지 URL을 입력해주세요.");
+    if (imageUrl) {
+      setCoverImgUrl(imageUrl);
+    }
+    return;
+  };
+
   useEffect(() => {
     if (state && !state.status) {
       alert(state.error);
@@ -38,6 +46,7 @@ const BookForm = () => {
             value={title}
             onChange={(e) => setTitle(e.target.value)}
             required
+            readOnly={false}
           />
           <InputField
             label=""
@@ -47,6 +56,7 @@ const BookForm = () => {
             value={subTitle}
             onChange={(e) => setSubTitle(e.target.value)}
             required
+            readOnly={false}
           />
           <InputField
             label=""
@@ -56,6 +66,7 @@ const BookForm = () => {
             value={author}
             onChange={(e) => setAuthor(e.target.value)}
             required
+            readOnly={false}
           />
           <InputField
             label=""
@@ -65,6 +76,7 @@ const BookForm = () => {
             value={description}
             onChange={(e) => setDescription(e.target.value)}
             required
+            readOnly={false}
           />
           <InputField
             label=""
@@ -74,15 +86,19 @@ const BookForm = () => {
             value={publisher}
             onChange={(e) => setPublisher(e.target.value)}
             required
+            readOnly={false}
           />
-          <InputField
-            label=""
+          <input
+            className={style.imgUrl}
+            type="text"
             id="coverImgUrl"
             name="coverImgUrl"
-            placeholder="이미지 URL을 입력해주세요."
+            placeholder="이미지 URL 추가하기"
             value={coverImgUrl}
             onChange={(e) => setCoverImgUrl(e.target.value)}
+            onClick={onAddImageUrl}
             required
+            readOnly
           />
           <span>잘못 된 이미지는 등록할 수 없습니다.</span>
           <BookPreview

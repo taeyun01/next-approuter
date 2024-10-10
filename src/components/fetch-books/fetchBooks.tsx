@@ -4,6 +4,8 @@ import style from "@/app/book/[id]/page.module.css";
 import { notFound } from "next/navigation";
 import ReviewItem from "../review-item";
 import Image from "next/image";
+import BookForm from "../editBook/BookForm";
+import EditButton from "@/app/book/[id]/components/EditButton";
 
 //? 각각 파일 만들어서 분리하기
 
@@ -79,10 +81,16 @@ export const SearchBooks = async ({ q }: { q: string }) => {
 };
 
 //* 특정[id] 도서 불러오기
-export const DetailBooks = async ({ bookId }: { bookId: string }) => {
+export const DetailBooks = async ({
+  bookId,
+  parallel,
+}: {
+  bookId: string;
+  parallel: boolean;
+}) => {
   const response = await fetch(
     `${process.env.NEXT_PUBLIC_API_SERVER_URL}/book/${bookId}`,
-    { cache: "force-cache" }
+    { next: { tags: [`book-${bookId}`] } }
   );
 
   if (!response.ok) {
@@ -113,6 +121,7 @@ export const DetailBooks = async ({ bookId }: { bookId: string }) => {
         {author} | {publisher}
       </div>
       <div className={style.description}>{description}</div>
+      {parallel ? null : <EditButton bookId={id} />}
     </section>
   );
 };
@@ -165,4 +174,22 @@ export const ReviewList = async ({ bookId }: { bookId: string }) => {
       ))}
     </section>
   );
+};
+
+//* 특정[id] 도서 수정 페이지
+export const DetailEditBook = async ({ bookId }: { bookId: string }) => {
+  const response = await fetch(
+    `${process.env.NEXT_PUBLIC_API_SERVER_URL}/book/${bookId}`,
+    { next: { tags: [`book-${bookId}`] } }
+  );
+
+  if (!response.ok) {
+    if (response.status === 404) return notFound(); // 없는 id도서를 불러올 시 notfound페이지 호출
+    return <div>검색 데이터를 불러오는데 오류가 발생했습니다.</div>;
+  }
+
+  const detailBook = await response.json();
+  // const { id, title, subTitle, description, author, publisher, coverImgUrl } = detailBook;
+
+  return <BookForm {...detailBook} />;
 };

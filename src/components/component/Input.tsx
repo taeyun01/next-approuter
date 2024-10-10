@@ -8,6 +8,8 @@ interface InputFieldProps {
   onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
   required: boolean;
   placeholder: string;
+  readOnly: boolean;
+  onClick?: (e: React.MouseEvent<HTMLInputElement>) => void;
 }
 
 const InputField = ({
@@ -18,6 +20,8 @@ const InputField = ({
   onChange,
   required,
   placeholder,
+  readOnly,
+  onClick,
 }: InputFieldProps) => (
   <div className={style.inputContainer}>
     <label htmlFor={id}>{label}</label>
@@ -28,8 +32,10 @@ const InputField = ({
       name={name}
       value={value}
       onChange={onChange}
+      onClick={onClick}
       placeholder={placeholder}
       required={required}
+      readOnly={readOnly}
     />
   </div>
 );
