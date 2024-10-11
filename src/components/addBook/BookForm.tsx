@@ -32,7 +32,7 @@ const BookForm = () => {
     if (state && state.status) {
       router.replace("/");
     }
-  }, [state]);
+  }, [state, router]);
 
   return (
     <div>

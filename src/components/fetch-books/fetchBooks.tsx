@@ -81,13 +81,7 @@ export const SearchBooks = async ({ q }: { q: string }) => {
 };
 
 //* 특정[id] 도서 불러오기
-export const DetailBooks = async ({
-  bookId,
-  parallel,
-}: {
-  bookId: string;
-  parallel: boolean;
-}) => {
+export const DetailBooks = async ({ bookId }: { bookId: string }) => {
   const response = await fetch(
     `${process.env.NEXT_PUBLIC_API_SERVER_URL}/book/${bookId}`,
     { next: { tags: [`book-${bookId}`] } }
@@ -113,6 +107,7 @@ export const DetailBooks = async ({
           alt={`도서: ${title}의 표지 이미지`}
           width={240}
           height={300}
+          unoptimized
         />
       </div>
       <div className={style.title}>{title}</div>
@@ -121,7 +116,9 @@ export const DetailBooks = async ({
         {author} | {publisher}
       </div>
       <div className={style.description}>{description}</div>
-      {parallel ? null : <EditButton bookId={id} />}
+      <div style={{ textAlign: "right" }}>
+        <EditButton bookId={id} />
+      </div>
     </section>
   );
 };

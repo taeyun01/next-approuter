@@ -1,4 +1,7 @@
-.editButton {
+.editButtonContainer {
   text-align: end;
+}
+
+.editButton {
   color: gray;
 }

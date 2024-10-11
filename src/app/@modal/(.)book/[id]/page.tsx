@@ -4,7 +4,7 @@ import Modal from "@/components/modal/modal";
 const Page = (props: any) => {
   return (
     <Modal>
-      <BookPage {...props} parallel={true} />
+      <BookPage {...props} />
     </Modal>
   );
 };
