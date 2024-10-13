@@ -3,7 +3,6 @@ import style from "@/app/book/[id]/page.module.css";
 import ReviewEditor from "@/components/review-editor";
 import { Metadata } from "next";
 import { BookData } from "@/types";
-import EditButton from "./components/EditButton";
 
 // 상세페이지 메타데이터 생성
 // 인터셉팅에는 적용되지 않을꺼다 근데 크게 상관없다.

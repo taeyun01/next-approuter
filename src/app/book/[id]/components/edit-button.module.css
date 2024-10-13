@@ -5,3 +5,11 @@
 .editButton {
   color: gray;
 }
+
+.deleteButton {
+  border: none;
+  background-color: transparent;
+  color: gray;
+  font-size: 16px;
+  cursor: pointer;
+}

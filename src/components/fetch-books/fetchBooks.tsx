@@ -6,6 +6,7 @@ import ReviewItem from "../review-item";
 import Image from "next/image";
 import BookForm from "../editBook/BookForm";
 import EditButton from "@/app/book/[id]/components/EditButton";
+import DeleteButton from "@/app/book/[id]/components/DeleteButton";
 
 //? 각각 파일 만들어서 분리하기
 
@@ -118,6 +119,7 @@ export const DetailBooks = async ({ bookId }: { bookId: string }) => {
       <div className={style.description}>{description}</div>
       <div style={{ textAlign: "right" }}>
         <EditButton bookId={id} />
+        <DeleteButton bookId={id} />
       </div>
     </section>
   );
