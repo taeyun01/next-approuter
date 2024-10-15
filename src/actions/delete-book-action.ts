@@ -2,7 +2,7 @@
 import { revalidateTag } from "next/cache";
 
 export const deleteBookAction = async (_: any, formData: FormData) => {
-  const bookId = formData.get("bookId")?.toString();
+  const bookId = formData.get("bookI2d")?.toString();
 
   if (!bookId) {
     return {
