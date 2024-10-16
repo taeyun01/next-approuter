@@ -134,7 +134,7 @@ export const Footer = async () => {
   const response = await fetch(
     `${process.env.NEXT_PUBLIC_API_SERVER_URL}/book`,
     // { cache: "force-cache" }
-    { next: { tags: ["allBooks"] } }
+    { next: { tags: ["allBooks-length"] } }
   );
 
   if (!response.ok) {

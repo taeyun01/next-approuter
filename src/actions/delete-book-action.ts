@@ -1,8 +1,7 @@
 "use server";
-import { revalidateTag } from "next/cache";
 
 export const deleteBookAction = async (_: any, formData: FormData) => {
-  const bookId = formData.get("bookI2d")?.toString();
+  const bookId = formData.get("bookId")?.toString();
 
   if (!bookId) {
     return {
@@ -23,7 +22,9 @@ export const deleteBookAction = async (_: any, formData: FormData) => {
       throw new Error(response.statusText);
     }
 
-    revalidateTag("allBooks"); // 제일 효율적 오직 해당 태그값을 갖는 fetch메서드의 데이터 페칭만 삭제가 된다.
+    //? revalidate 여기서 하지 않고 useEffect에서 처리
+    //? 삭제 처리하면서 revalidate하게 되면 데이터 페칭이 되면서 페이지가 렌더링이 되면서 404페이지가 먼저 실행되는 현상이 발생함
+    // revalidateTag("allBooks-length");
     // 성공시
     return {
       status: true,

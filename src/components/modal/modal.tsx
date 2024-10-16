@@ -19,7 +19,7 @@ const Modal = ({ children }: { children: React.ReactNode }) => {
   useEffect(() => {
     //* dialog태그는 초기값이 off로 설정돼있어 모달창이 안보여서
     if (!dialogRef.current?.open) {
-      dialogRef.current?.showModal(); //* 강제로 열어준다.
+      dialogRef.current?.showModal(); //* 강제로 열어준다. (dialog태그는에 open 속성이 붙음)
       dialogRef.current?.scrollTo({
         top: 0,
         // behavior: "smooth",
